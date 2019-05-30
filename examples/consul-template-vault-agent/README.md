@@ -17,3 +17,4 @@
 1. stern -n default -l app=vault-client-demo
 1. kubectl port-forward service/vault-client-demo 8043
 1. curl http://localhost:8043/test1.html
+1. kind delete cluster --name="kind"
