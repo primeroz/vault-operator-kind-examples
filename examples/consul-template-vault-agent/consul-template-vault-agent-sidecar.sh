@@ -175,8 +175,19 @@ data:
     <body>
     This is a Consul template generated at {{ timestamp }}<br><br>
 
-    Vault Values:<br>
-    {{ with secret "sandbox/data/values/test" }}
+    Vault Values - will refresh roughly every 5 minutes (Can't be changed) - KV version 2:<br>
+    {{ with secret "sandbox_v2/data/values/test" }}
+    value1 : {{ .Data.data.Value1 }}<br>
+    value2 : {{ .Data.data.Value2 }}<br>
+    {{end}}
+    <br><hr><br>
+    Vault Values - will refresh roughly every 32 days (default secret backend LEASE TTL) - KV version 1:<br>
+    {{ with secret "sandbox_v1/data/values/test1" }}
+    value1 : {{ .Data.data.Value1 }}<br>
+    value2 : {{ .Data.data.Value2 }}<br>
+    {{end}}
+    Vault Values - will refresh roughly every 1 minutes (specific secret LEASE TTL) - KV version 1:<br>
+    {{ with secret "sandbox_v1/data/values/test2" }}
     value1 : {{ .Data.data.Value1 }}<br>
     value2 : {{ .Data.data.Value2 }}<br>
     {{end}}

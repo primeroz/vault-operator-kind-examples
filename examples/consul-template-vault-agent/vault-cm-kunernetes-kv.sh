@@ -16,17 +16,23 @@ metadata:
 data:
   vault-config.yml: |-
     secrets:
-      - path: sandbox
+      - path: sandbox_v2
         type: kv-v2
         description: General secrets for the Sandbox
+      - path: sandbox_v1
+        type: kv
     policies:
       - name: sandbox
         rules: |
-          path "sandbox/data/*"
+          path "sandbox_v1/data/*"
           {
             capabilities = ["create","update","read","list", "delete"]
           }
-          path "sandbox/metadata/*"
+          path "sandbox_v2/data/*"
+          {
+            capabilities = ["create","update","read","list", "delete"]
+          }
+          path "sandbox_v2/metadata/*"
           {
             capabilities = ["create","update","read","list", "delete"]
           }
@@ -41,9 +47,22 @@ data:
             ttl: 10m
     startupSecrets:
       - type: kv
-        path: sandbox/data/values/test
+        path: sandbox_v2/data/values/test
         data:
           data:
             Value1: secretId
             Value2: s3cr3t
+      - type: kv
+        path: sandbox_v1/data/values/test1
+        data:
+          data:
+            Value1: aValue
+            Value2: anotherValue
+      - type: kv
+        path: sandbox_v1/data/values/test2
+        data:
+          ttl: 60s
+          data:
+            Value1: aShorterTTLValue
+            Value2: anotherShorterTTLValue
 EOF
