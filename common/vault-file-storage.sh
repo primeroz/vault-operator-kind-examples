@@ -73,6 +73,11 @@ spec:
 
   # See: https://github.com/banzaicloud/bank-vaults#example-external-vault-configuration for more details.
   externalConfig:
+    audit:
+      - type: file
+        description: "STDOUT Audit logging"
+        options:
+          file_path: stdout
     policies:
       - name: allow_secrets
         rules: path "secret/*" {

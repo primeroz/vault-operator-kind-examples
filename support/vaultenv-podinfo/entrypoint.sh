@@ -13,4 +13,5 @@ exec /usr/bin/vaultenv \
      --token ${VAULT_TOKEN} \
      --secrets-file ${SECRETS_FILE} \
      /usr/bin/podinfo \
+     -- \
      --port 8043
