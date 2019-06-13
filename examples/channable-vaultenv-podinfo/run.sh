@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-export BV_VERSION="0.4.16"
+export BV_VERSION="0.4.17-rc.3"
 ../../common/start-kind.sh
 ../../common/vault-operator.sh
 ../../common/vault-common.sh

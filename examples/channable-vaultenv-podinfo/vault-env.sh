@@ -67,7 +67,7 @@ spec:
           value: "true"
         - name: VAULT_ADDR
           value: https://vault.vault.svc.cluster.local:8200
-        image: vault:1.1.2
+        image: vault:1.1.3
         name: vault-agent
         command: ["vault"]
         args:

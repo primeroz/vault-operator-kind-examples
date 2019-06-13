@@ -12,7 +12,7 @@ metadata:
   namespace: vault
 spec:
   size: 1
-  image: vault:1.1.2
+  image: vault:1.1.3
   bankVaultsImage: banzaicloud/bank-vaults:${BV_VERSION}
 
   # Support for custom Vault (and sidecar) pod annotations
