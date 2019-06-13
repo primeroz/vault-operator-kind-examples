@@ -30,7 +30,7 @@ spec:
       containers:
       - name: alpine
         image: alpine
-        command: ["sh", "-c", "echo \$AWS_SECRET_ACCESS_KEY && echo going to sleep... && sleep 10000"]
+        command: ["sh", "-c", "echo SECRET:\$AWS_SECRET_ACCESS_KEY && echo going to sleep... && sleep 10000"]
         env:
         - name: AWS_SECRET_ACCESS_KEY
           value: vault:sandbox_v2/data/values/test#Value1
