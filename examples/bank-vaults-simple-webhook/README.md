@@ -8,7 +8,7 @@
 
 # STEPS
 
-1. export BV_VERSION="0.4.17-rc3"
+1. export BV_VERSION="0.4.17-rc.3"
 1. ../../common/start-kind.sh
 1. ../../common/vault-operator.sh
 1. ../../common/vault-common.sh

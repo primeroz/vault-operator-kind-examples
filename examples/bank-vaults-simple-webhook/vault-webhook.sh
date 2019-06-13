@@ -42,7 +42,7 @@ spec:
           secretName: release-name-vault-secrets-webhook
       containers:
         - name: vault-secrets-webhook
-          image: "banzaicloud/vault-secrets-webhook:0.4.17-rc3"
+          image: "banzaicloud/vault-secrets-webhook:0.4.17-rc.3"
           env:
           - name: TLS_CERT_FILE
             value: /var/serving-cert/servingCert
@@ -51,7 +51,7 @@ spec:
           - name: DEBUG
             value: "true"
           - name: VAULT_ENV_IMAGE
-            value: "banzaicloud/vault-env:0.4.17-rc3"
+            value: "banzaicloud/vault-env:0.4.17-rc.3"
           - name: VAULT_IMAGE
             value: "vault:1.1.3"
           imagePullPolicy: IfNotPresent
