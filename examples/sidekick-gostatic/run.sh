@@ -7,6 +7,6 @@ export BV_VERSION="0.4.17-rc.3"
 ../../common/vault-common.sh
 ./vault-cm-kunernetes-kv.sh
 ../../common/vault-file-storage.sh
-./sidekick-gostatis.sh
+./sidekick-gostatic.sh
 export KUBECONFIG=$(kind get kubeconfig-path)
 stern -n default -l app=vault-client-demo
