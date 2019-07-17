@@ -7,10 +7,10 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 version=$(kind version)
-if [ "x$version" != "xv0.3.0" ]; then
-  echo "You need version 0.3.0 of Kind"
-  exit 1
-fi
+#if [ "x$version" != "xv0.3.0" ]; then
+#  echo "You need version 0.3.0 of Kind"
+#  exit 1
+#fi
 
 K8S_VERSION="${K8S_VERSION:-v1.12.8@sha256:cc6e1a928a85c14b52e32ea97a198393fb68097f14c4d4c454a8a3bc1d8d486c}"
 K8S_WORKERS="${K8S_WORKERS:-1}"
