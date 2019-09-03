@@ -67,6 +67,17 @@ data:
             period: "30m"
             explicit_max_ttl: "43200"
             path_suffix: terraform
+      - type: approle
+        path: approle
+        roles:
+        - name: test
+          policies: "terraform,sandbox"
+          bind_secret_id: true
+          secret_id_ttl: ""
+          secret_id_num_uses: 0
+          token_num_uses: 0
+          token_ttl: 10m
+          token_max_ttl: 240m
     startupSecrets:
       - type: kv
         path: sandbox_v2/data/values/test
