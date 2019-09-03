@@ -78,6 +78,37 @@ data:
           token_num_uses: 0
           token_ttl: 10m
           token_max_ttl: 240m
+      - type: jwt
+        path: jwt
+        config:
+          oidc_discovery_url: http://dex.kube-auth.svc.cluster.local:5556
+          bound_issuer: http://dex.kube-auth.svc.cluster.local:5556
+          oidc_client_id: "vault"
+          oidc_client_secret: "secret"
+          default_role: mintel
+        roles:
+          - name: mintel
+            role_type: jwt
+            bound_audiences:
+              - vault-oidc
+              - vault
+            user_claim: email
+            groups_claim: "groups"
+            policies: "terraform,sandbox"
+            ttl: 10m
+            max_ttl: 24h
+          - name: oidc
+            role_type: oidc
+            bound_audiences:
+              - vault-oidc
+              - vault
+            user_claim: email
+            groups_claim: "groups"
+            oidc_scopes: "email,groups"
+            policies: "terraform,sandbox"
+            ttl: 10m
+            max_ttl: 24h
+            allowed_redirect_uris: "http://localhost:8250/oidc/callback,http://vault.kube-auth.svc.cluster.local/ui/vault/auth/jwt/oidc/callback"
     startupSecrets:
       - type: kv
         path: sandbox_v2/data/values/test
@@ -85,4 +116,17 @@ data:
           data:
             Value1: aws_secret_id
             Value2: aws_secret_key
+    groups:
+      - name: admin
+        policies:
+          - admin_access
+          - gcp_admin_access
+          - gcp_project_ci_admin_access
+        metadata:
+          privileged: "true"
+        type: external
+    group-aliases:
+      - name: k8s-admin
+        mountpath: jwt
+        group: admin
 EOF

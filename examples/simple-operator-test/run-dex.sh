@@ -68,7 +68,7 @@ rules:
 apiVersion: v1
 data:
   config.yaml: |
-    issuer: http://dex.kube-auth.svc.cluster.local
+    issuer: http://dex.kube-auth.svc.cluster.local:5556
     storage:
       type: kubernetes
       config:
@@ -84,7 +84,7 @@ data:
     frontend:
       theme: "coreos"
       issuer: "Test"
-      issuerUrl: "http://dex.kube-auth.svc.cluster.local"
+      issuerUrl: "http://dex.kube-auth.svc.cluster.local:5556"
       logoUrl: https://i.pinimg.com/originals/d3/97/8a/d3978a3830404998788e8c83dfa6f476.png
     
     telemetry:
@@ -239,7 +239,6 @@ spec:
     protocol: TCP
     targetPort: metrics
   selector:
-    app.kubernetes.io/part-of: dex
     name: dex
   sessionAffinity: None
   type: ClusterIP
