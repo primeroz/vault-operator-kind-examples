@@ -6,13 +6,14 @@ if [ $? -ne 0 ]; then
   echo "You need to download KIND from https://github.com/kubernetes-sigs/kind/releases" 
   exit 1
 fi
-version=$(kind version)
-#if [ "x$version" != "xv0.3.0" ]; then
-#  echo "You need version 0.3.0 of Kind"
-#  exit 1
-#fi
 
-K8S_VERSION="${K8S_VERSION:-v1.12.8@sha256:cc6e1a928a85c14b52e32ea97a198393fb68097f14c4d4c454a8a3bc1d8d486c}"
+kind version | egrep "^v0.5" >/dev/null 2>/dev/null
+if [ $? -ne 0 ]; then 
+  echo "Need kind version 0.5.x" 
+  exit 1
+fi
+
+K8S_VERSION="${K8S_VERSION:-v1.13.10@sha256:2f5f882a6d0527a2284d29042f3a6a07402e1699d792d0d5a9b9a48ef155fa2a}"
 K8S_WORKERS="${K8S_WORKERS:-1}"
 
 function start_kind() {
@@ -36,9 +37,6 @@ done
 
     kind create cluster --config /tmp/kind-config.yaml
 
-    #export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-    #kubectl cluster-info
-    #kubectl get all --all-namespaces
 }
 
 function load_image() {                                                                 
@@ -48,11 +46,11 @@ function load_image() {
 
 export KIND_K8S_VERSION="${K8S_VERSION}"
 start_kind
+
 #load_image banzaicloud/vault-operator:watch-external-secrets-using-labels
 export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
 
-#kubectl rollout status -n kube-system daemonset ip-masq-agent --timeout=180s
-#kubectl rollout status -n kube-system daemonset kindnet --timeout=180s
+kubectl rollout status -n kube-system daemonset kindnet --timeout=180s
 kubectl rollout status -n kube-system daemonset kube-proxy --timeout=180s
 kubectl rollout status -n kube-system deployment coredns --timeout=180s
 
