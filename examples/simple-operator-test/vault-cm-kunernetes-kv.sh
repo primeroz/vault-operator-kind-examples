@@ -19,6 +19,14 @@ data:
       - path: sandbox_v2
         type: kv-v2
         description: General secrets for the Sandbox
+      - path: terraform
+        type: kv
+        description: General secrets for using Terraform
+        options:
+          version: 2
+        configuration:
+          config:
+            - max_versions: 10
     policies:
       - name: sandbox
         rules: |
@@ -30,6 +38,16 @@ data:
           {
             capabilities = ["create","update","read","list", "delete"]
           }
+      - name: terraform
+        rules: |
+          path "terraform/data/*"
+          {
+            capabilities = ["read", "list"]
+          }
+          path "terraform/metadata/*"
+          {
+            capabilities = ["read", "list"]
+          }
     auth:
       - type: kubernetes
         roles:
@@ -39,6 +57,16 @@ data:
             bound_service_account_namespaces: default
             policies: sandbox
             ttl: 10m
+      - type: token
+        roles:
+          - name: terraform
+            allowed_policies:
+              - terraform_ci
+            orphan: true
+            renewable: true
+            period: "30m"
+            explicit_max_ttl: "43200"
+            path_suffix: terraform
     startupSecrets:
       - type: kv
         path: sandbox_v2/data/values/test
