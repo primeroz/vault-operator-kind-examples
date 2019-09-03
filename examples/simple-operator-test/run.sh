@@ -7,4 +7,4 @@ export BV_VERSION="0.4.18"
 ../../common/vault-common.sh
 ./run-dex.sh
 ./vault-cm-kunernetes-kv.sh
-./common/vault-file-storage.sh
+./vault-file-storage.sh
