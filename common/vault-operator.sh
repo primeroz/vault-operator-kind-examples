@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+export KUBECONFIG="$(kind get kubeconfig-path --name="vault")"
 BV_VERSION=${BV_VERSION:-0.4.17-rc.3}
 
 

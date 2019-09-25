@@ -2,7 +2,7 @@
 set -e
 
 BV_VERSION=${BV_VERSION:-0.4.17-rc.3}
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+export KUBECONFIG="$(kind get kubeconfig-path --name="vault")"
 
 cat <<EOF | kubectl apply -f -
 apiVersion: "vault.banzaicloud.com/v1alpha1"
