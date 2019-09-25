@@ -2,7 +2,7 @@
 set -e
 
 
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
+export KUBECONFIG="$(kind get kubeconfig-path --name="vault")"
 
 cat <<EOF | kubectl apply -f -
 kind: ServiceAccount

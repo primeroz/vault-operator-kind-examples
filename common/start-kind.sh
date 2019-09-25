@@ -35,13 +35,13 @@ do
 EOF
 done
 
-    kind create cluster --config /tmp/kind-config.yaml
+    kind create cluster --config /tmp/kind-config.yaml --name vault
 
 }
 
 function load_image() {                                                                 
   IMAGE=$1                                  
-  kind load docker-image "$IMAGE"
+  kind load docker-image "$IMAGE" --name vault
 }  
 
 export KIND_K8S_VERSION="${K8S_VERSION}"
