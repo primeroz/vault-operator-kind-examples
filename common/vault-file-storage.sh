@@ -12,7 +12,7 @@ metadata:
   namespace: vault
 spec:
   size: 1
-  image: vault:1.1.3
+  image: vault:1.2.3
   bankVaultsImage: banzaicloud/bank-vaults:${BV_VERSION}
 
   # Support for custom Vault (and sidecar) pod annotations
@@ -25,10 +25,23 @@ spec:
   vaultConfigurerAnnotations:
     fc.com/configurer: "true"
 
+  # watchedSecretsLabels:
+  #   - certmanager.k8s.io/certificate-name: vault-letsencrypt-cert-blah
+  #   - mintel.com/scope: gcp
+  #     mintel.com/credentials: vault
+
+  # watchedSecretsAnnotations:
+  #   - cert-manager.io/certificate-name: vault-letsencrypt-cert
+  #   - mintel.com/scope: test
+  #     mintel.com/credentials: something
+
   watchedSecretsLabels:
     - certmanager.k8s.io/certificate-name: vault-letsencrypt-cert
-    - mintel.com/scope: gcp
-      mintel.com/credentials: vault
+  watchedSecretsAnnotations:
+    - cert-manager.io/certificate-name: vault-letsencrypt-cert
+    - mycompany.com/match1: multi-annotation-match
+      mycompany.com/match2: multi-annotation-match
+
 
   # Specify the ServiceAccount where the Vault Pod and the Bank-Vaults configurer/unsealer is running
   serviceAccount: vault

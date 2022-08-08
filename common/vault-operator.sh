@@ -150,6 +150,7 @@ spec:
               name: metrics
           command:
             - vault-operator
+            - -verbose
           livenessProbe:
             httpGet:
               path: /
